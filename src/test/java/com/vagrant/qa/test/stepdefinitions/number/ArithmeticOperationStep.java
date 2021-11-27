@@ -1,4 +1,4 @@
-package com.test.vagrant.qa.stepdefinitions.number;
+package com.vagrant.qa.test.stepdefinitions.number;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
