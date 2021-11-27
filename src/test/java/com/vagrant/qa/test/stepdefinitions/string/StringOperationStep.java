@@ -1,4 +1,4 @@
-package com.test.vagrant.qa.stepdefinitions.string;
+package com.vagrant.qa.test.stepdefinitions.string;
 
 import io.cucumber.java.en.When;
 import org.testng.Assert;
