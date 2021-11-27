@@ -1,11 +1,11 @@
-package com.vafgrant.qa.test.drivermanager;
+package com.vafgrant.qa.test.drivers;
 
-import com.vafgrant.qa.test.configmanager.ReaderManager;
+import com.vafgrant.qa.test.configs.ReaderManager;
 import com.vafgrant.qa.test.exception.InvalidUserInputException;
 import io.cucumber.java.Scenario;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.net.URL;
 import java.time.Duration;
@@ -17,7 +17,8 @@ public abstract class DriverManager {
     protected abstract void setDefaultCapabilities();
 
     public WebDriver getWebDriver(){
-        if(null == driver) createWebDriver(); return driver;
+        if(null == driver) createWebDriver();
+        return driver;
     }
 
     public void includeImplicitWait() throws InvalidUserInputException {
@@ -33,9 +34,12 @@ public abstract class DriverManager {
 
 
     public void maximizeWindowWebDriver(){ driver.manage().window().maximize(); }
-    public Duration setDefaultImplicitWaitTime()  {  return Duration.ofSeconds(ReaderManager.getInstance().getGUIConfigReader().getDefaultImplicitWaitTime()); }
+    public Duration setDefaultImplicitWaitTime()  {  return Duration.ofSeconds(ReaderManager.getInstance().getGUIConfigReader().getDefaultWaitTime()); }
 
-    public void navigateToApplicationURL()  {  driver.navigate().to(constructURL()); }
+    public void navigateToApplicationURL()  {
+        driver.navigate().to(constructURL());
+        waitForFullPageLoad(driver);
+    }
     public String getTitle(){ return driver.getTitle(); }
 
     public URL constructURL()  {
@@ -54,5 +58,11 @@ public abstract class DriverManager {
             scenario.log(scenario.getName()+ " Failed");
             scenario.attach(screenshot, "image/png", scenario.getName());
         }
+    }
+
+    public void waitForFullPageLoad(WebDriver driver) {
+        ExpectedCondition<Boolean> pageLoadCondition = pageDriver -> ((JavascriptExecutor) pageDriver).executeScript("return document.readyState").equals("complete");
+        WebDriverWait driverWait = new WebDriverWait(driver, Duration.ofSeconds(ReaderManager.getInstance().getGUIConfigReader().getDefaultWaitTime()));
+        driverWait.until(pageLoadCondition);
     }
 }

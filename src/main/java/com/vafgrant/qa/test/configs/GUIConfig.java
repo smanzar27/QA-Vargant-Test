@@ -1,4 +1,4 @@
-package com.vafgrant.qa.test.configmanager;
+package com.vafgrant.qa.test.configs;
 
 import com.vafgrant.qa.test.exception.InvalidUserInputException;
 
@@ -20,8 +20,8 @@ public class GUIConfig extends ConfigReader{
         else throw new InvalidUserInputException("browser-name not specified in the configuration.properties file.");
     }
 
-    public int getDefaultImplicitWaitTime()  {
-        String implicitWait = properties.getProperty("implicit-wait");
+    public int getDefaultWaitTime()  {
+        String implicitWait = properties.getProperty("default-wait-time");
         if(implicitWait != null) return Integer.parseInt(implicitWait);
         else throw new RuntimeException("implicitWait not specified in the configuration.properties file.");
     }

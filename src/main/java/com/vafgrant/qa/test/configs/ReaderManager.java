@@ -1,4 +1,4 @@
-package com.vafgrant.qa.test.configmanager;
+package com.vafgrant.qa.test.configs;
 
 public class ReaderManager {
 

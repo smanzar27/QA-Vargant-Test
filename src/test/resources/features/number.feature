@@ -1,4 +1,4 @@
-@Number @Test
+@Number @TestMe
 Feature: Number Operation
   Description: Add Two Numbers
 

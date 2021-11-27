@@ -1,7 +1,7 @@
 package com.vagrant.qa.test.stepdefinitions;
 
 
-import com.vafgrant.qa.test.drivermanager.DriverManager;
+import com.vafgrant.qa.test.drivers.DriverManager;
 import com.vafgrant.qa.test.utils.Constant;
 import com.vafgrant.qa.test.utils.FileOperation;
 import io.cucumber.java.Scenario;
@@ -23,9 +23,10 @@ public class Hooks {
 
     @Before
     public void beforeScenario(Scenario scenario) throws InterruptedException {
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------");
         scenario.log("STARTING TEST: " + scenario.getName());
         System.out.println(scenario.getSourceTagNames());
-        System.out.println("-------------------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------");
 
         driverManager.getWebDriver();
         driverManager.maximizeWindowWebDriver();
@@ -35,15 +36,15 @@ public class Hooks {
 
     @After
     public void afterScenario(Scenario scenario) {
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------");
         scenario.log(("COMPLETE TEST: " + scenario.getName()));
-        System.out.println("-------------------------------------------------------------------------------------------------");
         driverManager.quitDriver();
+        System.out.println("---------------------------------------------------------------------------------------------------------------------------------------------------");
 
     }
 
     @BeforeStep
-    public void beforeStep(Scenario scenario)  {
-        FileOperation.createFile(Constant.CUCUMBER_STEP);
+    public void beforeStep(Scenario scenario)  { FileOperation.createFile(Constant.CUCUMBER_STEP);
     }
 
     @AfterStep

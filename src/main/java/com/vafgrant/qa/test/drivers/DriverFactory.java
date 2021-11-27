@@ -1,4 +1,4 @@
-package com.vafgrant.qa.test.drivermanager;
+package com.vafgrant.qa.test.drivers;
 
 public class DriverFactory {
 

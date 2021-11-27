@@ -1,21 +1,13 @@
 package com.vafgrant.qa.test.pageobjects;
 
-import com.vafgrant.qa.test.configmanager.ReaderManager;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.OutputType;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
-import java.util.List;
-import java.util.Optional;
 
 public class BaseWebBrowserService {
 
@@ -26,8 +18,9 @@ public class BaseWebBrowserService {
         PageFactory.initElements(driver, this);
     }
 
-    public void setString(WebElement element, String textString) {
-        element.clear();
+    public void setTextFieldValue(WebElement element, String textString) {
+        explicitWaitUntilVisibility(element);
+        clearString(element);
         element.sendKeys(textString);
     }
 
@@ -48,65 +41,20 @@ public class BaseWebBrowserService {
         return element.isDisplayed();
     }
 
-    public boolean isElementSelected(WebElement element) {
-        return element.isSelected();
-    }
 
-    public boolean isElementEnabled(WebElement element) {
-        return element.isEnabled();
-    }
 
     public void clickOperation(WebElement element) {
-        if (element.isDisplayed()) element.click();
+        explicitWaitUntilVisibility(element);
+        element.click();
     }
 
-    public boolean validatePasswordField(WebElement element) {
-        return element.getAttribute("type").equals("password");
+    protected void explicitWaitUntilVisibility(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void captureScreenshotByElement(WebElement element) {
-        try {
-            File file = element.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(file, new File("test.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void scrollTillElementVisible(WebElement webElement) {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView();", webElement);
-    }
-
-    public WebElement presenceOfWebElementInList(List<WebElement> webElementList, String searchString) {
-        Optional<WebElement> webElement = webElementList.stream().filter(checkbox ->
-                getString(checkbox).equals(searchString)).findFirst();
-        if (webElement.isPresent()) return webElement.get();
-        else throw new RuntimeException("Web Element NOT Found for Search String: " + searchString);
-    }
-
-    public boolean isDropdownOptionPresent(WebElement webElement, String optionString) {
-        Select select = new Select(webElement);
-        List<WebElement> options = select.getOptions();
-        for (WebElement option : options)
-            if (option.getText().equals(optionString)) return true;
-        return false;
-    }
-
-    public void selectDropdownOption(WebElement webElement, String optionString) {
-        Select select = new Select(webElement);
-        if (isDropdownOptionPresent(webElement, optionString))
-            select.selectByVisibleText(optionString);
-        else throw new RuntimeException("DROP DOWN OPTION NOT FOUND");
-    }
-
-    public String isDropdownOptionSelected(WebElement webElement) {
-        Select select = new Select(webElement);
-        return select.getFirstSelectedOption().getText();
-    }
-
-    protected void explicitWaitUntilInvisible(WebElement webElement) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(ReaderManager.getInstance().getGUIConfigReader().getDefaultImplicitWaitTime()));
-        wait.until(ExpectedConditions.visibilityOf(webElement));
+    public void switchToFrame(WebElement element) {
+        explicitWaitUntilVisibility(element);
+        driver.switchTo().frame(element);
     }
 }
