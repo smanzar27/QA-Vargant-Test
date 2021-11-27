@@ -9,13 +9,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
-public class AccuWeatherSteps {
+public class AccuWeatherCityWeatherStep {
 
     DriverManager driverManager;
     AccuWeatherHomePage homePage;
     AccuWeatherCityPage cityPage;
 
-    public AccuWeatherSteps(BaseTest baseTest) {
+    public AccuWeatherCityWeatherStep(BaseTest baseTest) {
         driverManager = baseTest.getWebDriverManager();
         homePage = baseTest.getPageObjectManager().getHomePage();
         cityPage = baseTest.getPageObjectManager().getCityPage();

@@ -17,7 +17,6 @@ public class Hooks {
     DriverManager driverManager;
 
     public Hooks(BaseTest baseTest){
-
         driverManager = baseTest.getWebDriverManager();
     }
 
@@ -44,7 +43,8 @@ public class Hooks {
     }
 
     @BeforeStep
-    public void beforeStep(Scenario scenario)  { FileOperation.createFile(Constant.CUCUMBER_STEP);
+    public void beforeStep(Scenario scenario)  {
+        FileOperation.createFile(Constant.CUCUMBER_STEP);
     }
 
     @AfterStep
