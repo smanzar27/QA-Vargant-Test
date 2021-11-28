@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
-import com.vafgrant.qa.test.utils.StringOperation;
+import com.vafgrant.qa.test.utils.UtilityOperation;
 
 import java.util.List;
 
@@ -32,8 +32,8 @@ public class AccuWeatherCityPage extends BaseWebBrowserService{
     protected WebElement dismiss_button;
 
 
-    public int getCityTemperature(){
-        return  StringOperation.extractInteger(getElementValue(city_element_list.get(0)));
+    public double getCityTemperature(){
+        return  UtilityOperation.extractDecimal(getElementValue(city_element_list.get(0)));
     }
 
     public void getCityDetails(){
