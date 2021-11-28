@@ -85,8 +85,8 @@ public class AccuWeatherCityWeatherStep {
         System.out.println(diffTemp);
         if(diffTemp==0.0)
             HardAssertion.assertTrue(true,"validated -> both gui and api " + cityName + " current temperature matches as: " + cityTempByGUI + " Celsius");
-        else if (diffTemp<=varianceRange)
-            Assert.assertTrue(true);
+        else if (diffTemp <= varianceRange)
+            HardAssertion.assertTrue(true, "validated -> temperature variance between by api and gui is within tolerance range: " + varianceRange);
         else
             throw new TemperatureVarianceException("temperature variance between by api and gui is outside tolerance range: " + varianceRange);
     }
