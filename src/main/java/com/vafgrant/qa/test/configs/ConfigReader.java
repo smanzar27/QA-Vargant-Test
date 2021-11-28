@@ -8,19 +8,14 @@ import java.util.Properties;
 
 public class ConfigReader {
 
-    private Properties properties;
-
     public ConfigReader() { }
-
-    public ConfigReader(String fileName){
-        properties=getProperties(fileName);
-    }
 
     public Properties getProperties(String fileName) {
 
         String propertyFilePath= Paths.get(System.getProperty("user.dir"),"src","test","resources").toString();
         String propertyFileName=Paths.get(propertyFilePath,fileName).toString();
         BufferedReader reader;
+        Properties properties;
         try {
             reader = new BufferedReader(new FileReader(propertyFileName));
             properties = new Properties();
