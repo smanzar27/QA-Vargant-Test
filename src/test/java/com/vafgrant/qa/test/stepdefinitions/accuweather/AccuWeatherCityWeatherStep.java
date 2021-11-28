@@ -1,4 +1,4 @@
-package com.vagrant.qa.test.stepdefinitions.accuweather;
+package com.vafgrant.qa.test.stepdefinitions.accuweather;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vafgrant.qa.test.drivers.DriverManager;
@@ -7,12 +7,11 @@ import com.vafgrant.qa.test.integrationobjects.ByCityWeatherService;
 import com.vafgrant.qa.test.pageobjects.AccuWeatherCityPage;
 import com.vafgrant.qa.test.pageobjects.AccuWeatherHomePage;
 import com.vafgrant.qa.test.utils.HardAssertion;
-import com.vagrant.qa.test.stepdefinitions.BaseTest;
+import com.vafgrant.qa.test.stepdefinitions.BaseTest;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.testng.Assert;
 
 import java.io.IOException;
 

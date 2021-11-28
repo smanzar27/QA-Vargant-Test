@@ -1,4 +1,4 @@
-package com.vagrant.qa.test.stepdefinitions;
+package com.vafgrant.qa.test.stepdefinitions;
 
 import com.vafgrant.qa.test.configs.ReaderManager;
 import com.vafgrant.qa.test.drivers.DriverFactory;

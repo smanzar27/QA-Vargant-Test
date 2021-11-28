@@ -1,4 +1,4 @@
-package com.vagrant.qa.test;
+package com.vafgrant.qa.test;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
@@ -10,7 +10,7 @@ import io.cucumber.testng.CucumberOptions;
                     ,"junit:target/cucumber.xml"
                     ,"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
         ,   features = "src/test/resources/features"
-        ,   glue = {"com.vagrant.qa.test.stepdefinitions"}
+        ,   glue = {"com.vafgrant.qa.test.stepdefinitions"}
         ,   tags = "@CityTemperature"
         ,   monochrome = true
 )
