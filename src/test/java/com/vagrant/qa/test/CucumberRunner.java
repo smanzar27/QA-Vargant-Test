@@ -11,7 +11,7 @@ import io.cucumber.testng.CucumberOptions;
                     ,"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
         ,   features = "src/test/resources/features"
         ,   glue = {"com.vagrant.qa.test.stepdefinitions"}
-        ,   tags = "@TestMe"
+        ,   tags = "@CityTemperature"
         ,   monochrome = true
 )
 
