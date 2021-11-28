@@ -24,7 +24,7 @@ public class BaseWebBrowserService {
         element.sendKeys(textString);
     }
 
-    public String getString(WebElement element) {
+    public String getElementValue(WebElement element) {
         return element.getText();
     }
 

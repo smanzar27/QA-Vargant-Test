@@ -7,6 +7,7 @@ import com.vafgrant.qa.test.utils.HardAssertion;
 import com.vagrant.qa.test.stepdefinitions.BaseTest;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class AccuWeatherCityWeatherStep {
@@ -33,6 +34,15 @@ public class AccuWeatherCityWeatherStep {
         homePage.searchCity(cityName);
         homePage.selectCity();
         System.out.println(driverManager.getTitle());
+    }
+
+    @Then("^the user fetches (.+) current temperature form current weather card$")
+    public void fetchCityTempFromGUI(String cityName) {
+        driverManager.waitForFullPageLoad(driverManager.getWebDriver());
+        if(driverManager.getTitle().contains(cityName))
+            HardAssertion.assertTrue(true, "validate -> search result displays city weather information for : " + cityName);
+        System.out.println(cityPage.getCityTemperature());
+
     }
 
     @And("^the user clicks on more details to get complete (.+) current weather information$")

@@ -6,6 +6,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
+import com.vafgrant.qa.test.utils.StringOperation;
+
+import java.util.List;
+
 public class AccuWeatherCityPage extends BaseWebBrowserService{
 
     WebDriver driver;
@@ -16,20 +20,23 @@ public class AccuWeatherCityPage extends BaseWebBrowserService{
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(how = How.XPATH, using = "//span[@class='text']")
+
+    @FindBy(how = How.XPATH, using = "//div[@class='temp']")
+    protected List<WebElement> city_element_list;
+
+    @FindBy(how = How.CLASS_NAME, using = "text")
     protected WebElement more_detail_link;
     @FindBy(how = How.XPATH, using = "//*[@id='google_ads_iframe_/6581/web/asi/interstitial/weather/local_home_0']")
     protected WebElement google_ads;
-    @FindBy(how = How.XPATH, using = "//*[@id='dismiss-button']")
+    @FindBy(how = How.ID, using = "dismiss-button")
     protected WebElement dismiss_button;
 
 
-    public static class TextMap {
-        public static String defaultPageTitle = "Local, National, & Global Daily Weather Forecast | AccuWeather";
+    public int getCityTemperature(){
+        return  StringOperation.extractInteger(getElementValue(city_element_list.get(0)));
     }
 
     public void getCityDetails(){
-
         clickOperation(more_detail_link);
         switchToFrame(google_ads);
         clickOperation(dismiss_button);

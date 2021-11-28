@@ -2,8 +2,8 @@ package com.vafgrant.qa.test.configs;
 
 public class ReaderManager {
 
-    private static ReaderManager readerManager = new ReaderManager();
-    private static GUIConfig guiConfigReader;
+    private static final ReaderManager readerManager = new ReaderManager();
+    protected static GUIConfig guiConfigReader;
 
     private ReaderManager() { }
 
